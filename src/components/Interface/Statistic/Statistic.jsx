@@ -1,27 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 const Statistic = ({ good, neutral, bad, total, positivePercentage }) => {
   return (
     <ul>
       <li>
-        <p>Good: {good}</p>
+        <Text>Good: {good}</Text>
       </li>
       <li>
-        <p>Neutral: {neutral}</p>
+        <Text>Neutral: {neutral}</Text>
       </li>
       <li>
-        <p>Bad: {bad}</p>
+        <Text>Bad: {bad}</Text>
       </li>
       <li>
-        <p>Total: {total}</p>
+        <Text>Total: {total}</Text>
       </li>
       <li>
-        <p>Positive feedback: {positivePercentage}%</p>
+        <Text>Positive feedback: {positivePercentage}%</Text>
       </li>
     </ul>
   );
 };
+
+const Text = styled.p`
+  font-size: 30px;
+`;
 
 Statistic.propTypes = {
   good: PropTypes.number.isRequired,

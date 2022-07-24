@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FeedbackOptions from './FeedbackOptions';
 import Statistic from './Statistic';
 import Notification from './Notification';
+import Section from './Section';
 
 class Interface extends Component {
   state = {
@@ -11,7 +12,7 @@ class Interface extends Component {
   };
 
   handleIncrement = event => {
-    const index = event.target.className;
+    const index = event.target.name;
     this.setState(prevState => {
       return { [index]: prevState[index] + 1 };
     });
@@ -37,25 +38,27 @@ class Interface extends Component {
     const total = this.countTotalFeedback();
     const positivePercentage = this.countPositiveFeedbackPercentage();
     return (
-      <div className="container">
-        <p className="text">Leave your feedback please</p>
-        <FeedbackOptions
-          options={options}
-          onLeaveFeedback={this.handleIncrement}
-        />
-        <p>Statistics</p>
-        {total === 0 ? (
-          <Notification message={'There is no feedback'} />
-        ) : (
-          <Statistic
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            total={total}
-            positivePercentage={positivePercentage}
+      <>
+        <Section title={'Leave your feedback please'}>
+          <FeedbackOptions
+            options={options}
+            onLeaveFeedback={this.handleIncrement}
           />
-        )}
-      </div>
+        </Section>
+        <Section title={'Statistics'}>
+          {total === 0 ? (
+            <Notification message={'There is no feedback'} />
+          ) : (
+            <Statistic
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={total}
+              positivePercentage={positivePercentage}
+            />
+          )}
+        </Section>
+      </>
     );
   }
 }
